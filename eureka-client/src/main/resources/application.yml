@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-client
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:8761/eureka/,http://root:root@localhost:8762/eureka/
+  instance:
+    prefer-ip-address: true
+logging:
+  level:
+    root: debug
