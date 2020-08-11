@@ -6,9 +6,13 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://root:root@localhost:8761/eureka/,http://root:root@localhost:8762/eureka/
-  instance:
+      defaultZone: http://root:root@localhost:8761/eureka/,http://root:root@localhost:8762/eureka/,http://root:root@localhost:8763/eureka/
+    registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
     prefer-ip-address: true
+  instance:
+    lease-renewal-interval-in-seconds: 30 #默认30秒发送一次心跳（定时任务）com/netflix/discovery/DiscoveryClient.class:905
+    metadata-map:
+      a: b #灰度发布
 logging:
   level:
     root: debug
