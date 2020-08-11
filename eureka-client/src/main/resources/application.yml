@@ -9,8 +9,11 @@ eureka:
       defaultZone: http://root:root@localhost:8761/eureka/,http://root:root@localhost:8762/eureka/,http://root:root@localhost:8763/eureka/
     registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
     prefer-ip-address: true
+    healthcheck:
+      enabled: true #开启健康检查，需要引入actuator
   instance:
-    lease-renewal-interval-in-seconds: 30 #默认30秒发送一次心跳（定时任务）com/netflix/discovery/DiscoveryClient.class:905
+    lease-renewal-interval-in-seconds: 30 #发送心跳给server的频率，每隔这个时间会主动心跳一次（定时任务）com/netflix/discovery/DiscoveryClient.class:905
+    lease-expiration-duration-in-seconds: 90 #Server从收到client后，下一次收到心跳的间隔时间。超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
     metadata-map:
       a: b #灰度发布
 logging:

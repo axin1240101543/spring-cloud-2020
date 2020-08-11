@@ -3,7 +3,8 @@ spring:
     name: eureka-server
 eureka:
   server:
-    enable-self-preservation: false
+    enable-self-preservation: false #关闭自我保护
+    eviction-interval-timer-in-ms: 60000 #清理服务间隔时间，毫秒
   instance:
     prefer-ip-address: true
 logging:
