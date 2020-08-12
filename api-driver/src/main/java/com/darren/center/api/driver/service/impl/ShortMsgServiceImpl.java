@@ -54,13 +54,13 @@ public class ShortMsgServiceImpl implements ShortMsgService {
         smsSendRequest.setReceivers(phoneNumbers);
         smsSendRequest.setData(data);
         //正常ribbon调用
-        //ResponseResult responseResult = restTemplateRequestService.smsSend(smsSendRequest);
+        ResponseResult responseResult = restTemplateRequestService.smsSend(smsSendRequest);
 
         //自定义ribbon调用（注释@LoadBalanced注解）
-        String serviceName = "service-sms";
+        /*String serviceName = "service-sms";
         ServiceInstance serviceInstance = myLoadBalance(serviceName);
         String url = "http://" + serviceInstance.getHost()  + ":" + serviceInstance.getPort() + "/send/alisms-template";
-        ResponseResult responseResult = restTemplate.postForEntity(url, smsSendRequest, ResponseResult.class).getBody();
+        ResponseResult responseResult = restTemplate.postForEntity(url, smsSendRequest, ResponseResult.class).getBody();*/
 
         log.info("短信发送结束, 发送结果:{}", responseResult);
         return responseResult;

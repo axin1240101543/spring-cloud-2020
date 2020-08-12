@@ -19,3 +19,11 @@ eureka:
 logging:
   level:
     root: info
+service-sms: #serviceId
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+ribbon:
+  eager-load:
+    enabled: true #饥饿模式 启动时得到所有服务，对应的服务列表
+    clients:
+      - SERVICE-SMS
