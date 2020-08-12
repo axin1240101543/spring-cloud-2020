@@ -8,7 +8,7 @@ eureka:
     prefer-ip-address: true
 logging:
   level:
-    root: debug
+    root: info
 ---
 spring:
   profiles: 8761

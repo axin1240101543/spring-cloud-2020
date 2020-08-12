@@ -1,14 +1,11 @@
 spring:
   application:
-    name: eureka-client
-server:
-  port: 8082
+    name: service-sms
 eureka:
   client:
     service-url:
       defaultZone: http://root:root@localhost:8761/eureka/
     registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
-    prefer-ip-address: true
     healthcheck:
       enabled: true #开启健康检查，需要引入actuator
   instance:
@@ -16,6 +13,17 @@ eureka:
     lease-expiration-duration-in-seconds: 90 #Server从收到client后，下一次收到心跳的间隔时间。超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
     metadata-map:
       a: b #灰度发布
+    prefer-ip-address: true
 logging:
   level:
-    root: debug
+    root: info
+---
+spring:
+  profiles: 8881
+server:
+  port: 8881 #服务端口
+---
+spring:
+  profiles: 8882
+server:
+  port: 8882 #服务端口
