@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: eureka-register
+server:
+  port: 8761
+
+eureka:
+  server:
+    enable-self-preservation: false #关闭自我保护
+    eviction-interval-timer-in-ms: 60000 #清理服务间隔时间，毫秒
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:8761/eureka/
+
+logging:
+  level:
+    root: debug
