@@ -23,15 +23,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- eureka client（默认集成ribbon） -->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>-->
-        <!-- 单独使用ribbon -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!-- 单独使用ribbon -->
+        <!--<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>-->
         <!-- 健康检查 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

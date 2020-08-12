@@ -14,6 +14,7 @@ eureka:
     metadata-map:
       a: b #灰度发布
     prefer-ip-address: true
+    virtual-host-name: service-sms #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
 logging:
   level:
     root: info

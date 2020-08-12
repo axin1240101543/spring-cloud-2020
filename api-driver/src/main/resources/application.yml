@@ -16,21 +16,29 @@ eureka:
     metadata-map:
       a: b #灰度发布
     prefer-ip-address: true
+    virtual-host-name: api-driver #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
 
 #日志
 logging:
   level:
     root: info
 
-#ribbon
+#ribbon单个服务配置：
 service-sms: #serviceId
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
-    eureka:
-      enable: false
-    listOfServers: localhost:8881,localhost:8882
+
+#ribbon独立使用
+#service-sms: #serviceId
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+#    eureka:
+#      enable: false
+#    listOfServers: localhost:8881,localhost:8882
+
+#ribbon开启饥饿模式
 ribbon:
   eager-load:
-    enabled: true #饥饿模式 启动时得到所有服务，对应的服务列表
+    enabled: true #饥饿模式 启动拉取服务列表。默认false：当服务调用时，采取拉取服务列表。
     clients:
       - SERVICE-SMS
