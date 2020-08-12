@@ -25,7 +25,7 @@ public class SmsController {
     private ShortMsgService shortMsgService;
 
     /**
-     * http://192.168.229.1:8081/sms/verify-code/send?phoneNumber=13838380438
+     * http://localhost:8081/sms/verify-code/send?phoneNumber=13838380438
      * @Validated ：校验phoneNumber
      * @param phoneNumber
      * @return

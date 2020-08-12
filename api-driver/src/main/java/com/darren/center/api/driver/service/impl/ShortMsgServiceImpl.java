@@ -7,12 +7,12 @@ import com.darren.center.service.common.dto.sms.SmsSendRequest;
 import com.darren.center.service.common.dto.sms.SmsTemplateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <h3>spring-cloud-2020</h3>
@@ -27,6 +27,14 @@ public class ShortMsgServiceImpl implements ShortMsgService {
 
     @Autowired
     private RestTemplateRequestService restTemplateRequestService;
+
+    /**
+     * org.springframework.cloud.client.discovery.DiscoveryClient;
+     */
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public ResponseResult send(String phoneNumber, String code) {
@@ -45,9 +53,29 @@ public class ShortMsgServiceImpl implements ShortMsgService {
         SmsSendRequest smsSendRequest = new SmsSendRequest();
         smsSendRequest.setReceivers(phoneNumbers);
         smsSendRequest.setData(data);
-        //ribbon调用
-        ResponseResult responseResult = restTemplateRequestService.smsSend(smsSendRequest);
+        //正常ribbon调用
+        //ResponseResult responseResult = restTemplateRequestService.smsSend(smsSendRequest);
+
+        //自定义ribbon调用（注释@LoadBalanced注解）
+        String serviceName = "service-sms";
+        ServiceInstance serviceInstance = myLoadBalance(serviceName);
+        String url = "http://" + serviceInstance.getHost()  + ":" + serviceInstance.getPort() + "/send/alisms-template";
+        ResponseResult responseResult = restTemplate.postForEntity(url, smsSendRequest, ResponseResult.class).getBody();
+
         log.info("短信发送结束, 发送结果:{}", responseResult);
         return responseResult;
+    }
+
+    /**
+     * 手写负载均衡算法
+     * @param serviceName
+     * @return
+     */
+    private ServiceInstance myLoadBalance(String serviceName){
+        List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
+        ServiceInstance serviceInstance = instances.get(new Random().nextInt(instances.size()));
+        log.info("myLoadBalance，host:{}，port:{}，serviceId:{}, instanceId:{}",
+                serviceInstance.getHost(), serviceInstance.getPort(), serviceInstance.getServiceId(), serviceInstance.getInstanceId());
+        return serviceInstance;
     }
 }

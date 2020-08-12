@@ -26,7 +26,7 @@ public class SmsController {
 
     /**
      *
-     * http://192.168.229.1:8080/sms/verify-code/send?phoneNumber=13838380438
+     * http://localhost:8080/sms/verify-code/send?phoneNumber=13838380438
      * @Validated ：校验phoneNumber
      * @param phoneNumber
      * @return
