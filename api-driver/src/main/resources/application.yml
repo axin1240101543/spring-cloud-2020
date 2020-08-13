@@ -24,9 +24,9 @@ logging:
     root: info
 
 #ribbon单个服务配置：
-service-sms: #serviceId
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+#service-sms: #serviceId
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
 
 #ribbon独立使用
 #service-sms: #serviceId
@@ -37,8 +37,8 @@ service-sms: #serviceId
 #    listOfServers: localhost:8881,localhost:8882
 
 #ribbon开启饥饿模式
-ribbon:
-  eager-load:
-    enabled: true #饥饿模式 启动拉取服务列表。默认false：当服务调用时，采取拉取服务列表。
-    clients:
-      - SERVICE-SMS
+#ribbon:
+#  eager-load:
+#    enabled: true #饥饿模式 启动拉取服务列表。默认false：当服务调用时，采取拉取服务列表。
+#    clients:
+#      - SERVICE-SMS
