@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients //就像是一个开关，只有使用了该注解，OpenFeign相关的组件和配置机制才会生效。还可以对OpenFeign相关组件进行自定义配置
 @SpringBootApplication
 public class ApiPassengerApplication {
 
