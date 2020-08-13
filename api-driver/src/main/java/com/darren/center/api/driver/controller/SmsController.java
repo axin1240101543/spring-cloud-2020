@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <h3>spring-cloud-2020</h3>
@@ -55,5 +52,20 @@ public class SmsController {
         log.info("sms节点信息：url:{},port:{}", choose.getHost(), choose.getPort());
         return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
     }
+
+    /**
+     * 测试ribbon
+     * http://localhost:8080/sms/choseServiceName/service-sms
+     * http://localhost:8080/sms/choseServiceName/service-valuation
+     * @param serviceId
+     * @return
+     */
+    @GetMapping("/choseServiceName/{serviceId}")
+    public ResponseResult choseServiceName(@PathVariable("serviceId") String serviceId) {
+        ServiceInstance choose = loadBalancerClient.choose(serviceId);
+        log.info("sms节点信息：url:{},port:{}", choose.getHost(), choose.getPort());
+        return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
+    }
+
 
 }
