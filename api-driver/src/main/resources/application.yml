@@ -23,22 +23,36 @@ logging:
   level:
     root: info
 
-#ribbon单个服务配置：
+#属性配置方式优先级高于Java代码，示例：https://www.jianshu.com/p/508f62fa0de5
+#针对服务定ribbon策略：
+#ribbon使用（依赖Eureka）
 #service-sms: #serviceId
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
-
-#ribbon独立使用
+#ribbon独立使用（脱离Eureka）
 #service-sms: #serviceId
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
 #    eureka:
-#      enable: false
-#    listOfServers: localhost:8881,localhost:8882
+#      enable: false # 将Eureka关闭，则Ribbon无法从Eureka中获取服务端列表信息
+#    listOfServers: localhost:8881,localhost:8882 # listOfServers可以设置服务端列表
 
-#ribbon开启饥饿模式
+
+#给所有服务定ribbon策略：
+#ribbon使用（依赖Eureka）
 #ribbon:
-#  eager-load:
-#    enabled: true #饥饿模式 启动拉取服务列表。默认false：当服务调用时，采取拉取服务列表。
-#    clients:
-#      - SERVICE-SMS
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+#ribbon独立使用（脱离Eureka）
+#ribbon:
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+#  eureka:
+#    enable: false # 将Eureka关闭，则Ribbon无法从Eureka中获取服务端列表信息
+#  listOfServers: localhost:8881,localhost:8882 # listOfServers可以设置服务端列表
+
+
+#ribbon开启饥饿模式   Spring Cloud默认是懒加载，指定名称的Ribbon Client第一次请求时，对应的上下文才会被加载，所以第一次访问慢。
+ribbon:
+  eager-load:
+    enabled: true #饥饿模式 将在启动时加载对应的程序上下文，从而提高首次请求的访问速度。默认false：当服务调用时，采取拉取服务列表。
+    clients:
+      - SERVICE-SMS
