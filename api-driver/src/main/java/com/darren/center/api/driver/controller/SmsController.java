@@ -63,7 +63,7 @@ public class SmsController {
     @GetMapping("/choseServiceName/{serviceId}")
     public ResponseResult choseServiceName(@PathVariable("serviceId") String serviceId) {
         ServiceInstance choose = loadBalancerClient.choose(serviceId);
-        log.info("sms节点信息：url:{},port:{}", choose.getHost(), choose.getPort());
+        log.info("节点信息：url:{},port:{}", choose.getHost(), choose.getPort());
         return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
     }
 

@@ -27,8 +27,9 @@ logging:
 #针对服务定ribbon策略：
 #ribbon使用（依赖Eureka）
 #service-sms: #serviceId
-#  ribbon:
-#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+  #ribbon:
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+    #NFLoadBalancerRuleClassName: com.darren.center.api.driver.ribbonconfig.MyRandomRule #自定义策略，默认轮训策略
 #ribbon独立使用（脱离Eureka）
 #service-sms: #serviceId
 #  ribbon:

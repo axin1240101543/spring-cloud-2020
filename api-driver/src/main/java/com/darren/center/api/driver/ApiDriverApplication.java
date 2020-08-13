@@ -17,17 +17,17 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @SpringBootApplication
 //给所有client设置随机策略
-//@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
+@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
 
 //给service-sms设置随机策略
-@RibbonClient(name = "service-sms", configuration = RibbonConfiguration.class)
+//@RibbonClient(name = "service-sms", configuration = RibbonConfiguration.class)
 //被@ExcudeRibbonConfig注解的类不扫描
-@ComponentScan(
-        basePackages = {"com.darren.center.api.driver"},
-        excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {ExcudeRibbonConfig.class}
-                )}
-)
+//@ComponentScan(
+//        basePackages = {"com.darren.center.api.driver"},
+//        excludeFilters = {
+//                @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {ExcudeRibbonConfig.class}
+//                )}
+//)
 public class ApiDriverApplication {
 
     public static void main(String[] args) {
