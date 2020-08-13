@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
  * @author : Darren
  * @date : 2020年08月13日 09:33:55
  **/
-@ExcudeRibbonConfig
-@Configuration
+//@ExcudeRibbonConfig
+//@Configuration
 public class RibbonConfiguration {
 
     /*@Bean
@@ -23,9 +23,9 @@ public class RibbonConfiguration {
         return new RandomRule();
     }*/
 
-    @Bean
+    /*@Bean
     public IRule ribbonRule(){
         return new MyRandomRule();
-    }
+    }*/
 
 }

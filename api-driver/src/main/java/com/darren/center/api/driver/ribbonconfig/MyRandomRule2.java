@@ -6,15 +6,16 @@ import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.Server;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * <h3>spring-cloud-2020</h3>
  * <p>自定义负载均衡策略</p>
- *
+ * 如何按照流量分发（60%到A，40%到B）
  * @author : Darren
  * @date : 2020年08月13日 11:30:10
  **/
-public class MyRandomRule extends AbstractLoadBalancerRule {
+public class MyRandomRule2 extends AbstractLoadBalancerRule {
 
     @Override
     public Server choose(Object key) {
@@ -48,13 +49,13 @@ public class MyRandomRule extends AbstractLoadBalancerRule {
                 /*int index = this.chooseRandomInt(serverCount);
                 server = (Server)upList.get(index);*/
 
-                //选自定义元数据的server，选择端口以1或者3结尾的服务。
-                for (int i = 0; i < upList.size(); i++) {
-                    server = upList.get(i);
-                    String hostPort = server.getHostPort();
-                    if (hostPort.endsWith("1") || hostPort.endsWith("3")){
-                        break;
-                    }
+                //选自定义元数据的server，将60%流量分发到A，将40%到B，可以更复杂
+                Random random = new Random();
+                final int number = random.nextInt(10);
+                if (number < 7){
+                    server = upList.get(0);
+                }else {
+                    server = upList.get(1);
                 }
 
                 if (server == null) {

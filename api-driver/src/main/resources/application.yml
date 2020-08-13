@@ -26,10 +26,10 @@ logging:
 #属性配置方式优先级高于Java代码，示例：https://www.jianshu.com/p/508f62fa0de5
 #针对服务定ribbon策略：
 #ribbon使用（依赖Eureka）
-#service-sms: #serviceId
-  #ribbon:
+service-sms: #serviceId
+  ribbon:
     #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
-    #NFLoadBalancerRuleClassName: com.darren.center.api.driver.ribbonconfig.MyRandomRule #自定义策略，默认轮训策略
+    NFLoadBalancerRuleClassName: com.darren.center.api.driver.ribbonconfig.MyRandomRule2 #自定义策略，默认轮训策略
 #ribbon独立使用（脱离Eureka）
 #service-sms: #serviceId
 #  ribbon:

@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @SpringBootApplication
 //给所有client设置随机策略
-@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
+//@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
 
 //给service-sms设置随机策略
 //@RibbonClient(name = "service-sms", configuration = RibbonConfiguration.class)
