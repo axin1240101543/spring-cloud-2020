@@ -18,6 +18,7 @@
 
         <!-- 能力层 -->
         <module>service-sms</module><!--短信服务-->
+        <module>service-valuation</module><!--估价服务-->
 
         <!--基础服务层-->
         <module>eureka-register</module><!--注册中心-->
