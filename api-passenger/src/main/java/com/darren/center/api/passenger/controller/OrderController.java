@@ -10,10 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -22,12 +19,26 @@ public class OrderController {
 	
 	@Autowired
 	private ServiceForecast serviceForecast;
-	
-	@PostMapping("/forecast")
-	public ResponseResult<ForecastResponse> forecast(@RequestBody ForecastRequest forecastRequest) {
-		
+
+    /**
+     * http://localhost:8081/order/forecast?startLatitude=1&startLongitude=2&endLatitude=3&endLongitude=4
+     * @param startLatitude
+	 * @param startLongitude
+	 * @param endLatitude
+	 * @param endLongitude
+     * @return
+     */
+	@GetMapping("/forecast")
+	public ResponseResult<ForecastResponse> forecast(@RequestParam(value = "startLatitude") String startLatitude,
+													 @RequestParam(value = "startLongitude") String startLongitude,
+													 @RequestParam(value = "endLatitude") String endLatitude,
+													 @RequestParam(value = "endLongitude") String endLongitude) {
+        ForecastRequest forecastRequest = new ForecastRequest();
+        forecastRequest.setStartLatitude(startLatitude);
+		forecastRequest.setStartLongitude(startLongitude);
+        forecastRequest.setEndLatitude(endLatitude);
+		forecastRequest.setEndLongitude(endLongitude);
 		ResponseResult<ForecastResponse> result = serviceForecast.forecast(forecastRequest);
-		
 		return ResponseResult.success(result.getData());
 	}
 	
