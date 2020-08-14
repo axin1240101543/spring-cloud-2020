@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//此处由于结合了eureka，所以name是 虚拟主机名，默认服务名，请求时 会将它解析成注册表中的服务。
-//不结合eureka，就是自定义一个client名字。就用url属性指定 服务器列表。url=“http://ip:port/”
-//此时的name作用就是创建负载均衡器。
-//也可以添加@RequestMapping
-@FeignClient(name = "service-valuation")
+/**
+ * 此处由于结合了eureka，所以name是 虚拟主机名，默认服务名，请求时 会将它解析成注册表中的服务。
+ * 不结合eureka，就是自定义一个client名字。就用url属性指定 服务器列表。url=“http://ip:port/”
+ * 此时的name作用就是创建负载均衡器。
+ * 也可以添加@RequestMapping
+ */
+//@FeignClient(name = "service-valuation")
+@FeignClient(name = "my-service-valuation", url = "http://localhost:8883/")
 public interface ServiceForecast {
 	
 	@RequestMapping(value = "/forecast/single",method = RequestMethod.POST)
