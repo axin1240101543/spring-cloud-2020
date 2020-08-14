@@ -22,3 +22,11 @@ eureka:
 logging:
   level:
     root: info
+
+#ribbon开启饥饿模式   Spring Cloud默认是懒加载，指定名称的Ribbon Client第一次请求时，对应的上下文才会被加载，所以第一次访问慢。
+ribbon:
+  eager-load:
+    enabled: true #饥饿模式 将在启动时加载对应的程序上下文，从而提高首次请求的访问速度。默认false：当服务调用时，采取拉取服务列表。
+    clients:
+      - SERVICE-SMS
+      - SERVICE-VALUATION

@@ -14,12 +14,11 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.client.RestTemplate;
 
 
-@EnableEurekaClient
-@SpringBootApplication
+
 //给所有client设置随机策略
 //@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
 
-//给service-sms设置随机策略
+//给service-sms设置随机策略（需要配置类不被启动类扫描到，否则配置类将对所有client生效）
 //@RibbonClient(name = "service-sms", configuration = RibbonConfiguration.class)
 //被@ExcudeRibbonConfig注解的类不扫描
 //@ComponentScan(
@@ -28,6 +27,8 @@ import org.springframework.web.client.RestTemplate;
 //                @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {ExcudeRibbonConfig.class}
 //                )}
 //)
+@EnableEurekaClient
+@SpringBootApplication
 public class ApiDriverApplication {
 
     public static void main(String[] args) {

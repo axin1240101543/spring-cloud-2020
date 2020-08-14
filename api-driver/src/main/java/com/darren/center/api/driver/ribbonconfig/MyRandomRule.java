@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * <h3>spring-cloud-2020</h3>
  * <p>自定义负载均衡策略</p>
- *
+ * 选择端口以1或者3结尾的服务
  * @author : Darren
  * @date : 2020年08月13日 11:30:10
  **/
@@ -45,10 +45,7 @@ public class MyRandomRule extends AbstractLoadBalancerRule {
                     return null;
                 }
 
-                /*int index = this.chooseRandomInt(serverCount);
-                server = (Server)upList.get(index);*/
-
-                //选自定义元数据的server，选择端口以1或者3结尾的服务。
+                //选择端口以1或者3结尾的服务
                 for (int i = 0; i < upList.size(); i++) {
                     server = upList.get(i);
                     String hostPort = server.getHostPort();

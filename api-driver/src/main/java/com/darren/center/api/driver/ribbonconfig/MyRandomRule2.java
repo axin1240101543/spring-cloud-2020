@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * <h3>spring-cloud-2020</h3>
  * <p>自定义负载均衡策略</p>
- * 如何按照流量分发（60%到A，40%到B）
+ * 按照流量分发（60%到A，40%到B）
  * @author : Darren
  * @date : 2020年08月13日 11:30:10
  **/
@@ -46,10 +46,7 @@ public class MyRandomRule2 extends AbstractLoadBalancerRule {
                     return null;
                 }
 
-                /*int index = this.chooseRandomInt(serverCount);
-                server = (Server)upList.get(index);*/
-
-                //选自定义元数据的server，将60%流量分发到A，将40%到B，可以更复杂
+                //将60%流量分发到A，将40%到B
                 Random random = new Random();
                 final int number = random.nextInt(10);
                 if (number < 7){

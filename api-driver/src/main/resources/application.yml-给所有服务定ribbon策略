@@ -22,3 +22,8 @@ eureka:
 logging:
   level:
     root: info
+
+#给所有服务定ribbon策略：
+#ribbon使用（依赖Eureka）
+ribbon:
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略

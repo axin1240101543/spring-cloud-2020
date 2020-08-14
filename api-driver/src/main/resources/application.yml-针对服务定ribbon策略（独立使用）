@@ -22,3 +22,13 @@ eureka:
 logging:
   level:
     root: info
+
+#属性配置方式优先级高于Java代码，示例：https://www.jianshu.com/p/508f62fa0de5
+#针对服务定ribbon策略：
+#ribbon独立使用（脱离Eureka）
+service-sms: #serviceId
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机策略，默认轮训策略
+    eureka:
+      enable: false # 将Eureka关闭，则Ribbon无法从Eureka中获取服务端列表信息
+    listOfServers: localhost:8881,localhost:8882 # listOfServers可以设置服务端列表
