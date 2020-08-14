@@ -1,9 +1,12 @@
 spring:
   application:
     name: eureka-register
+  security:
+    user:
+      name: root
+      password: 1234
 server:
   port: 8761
-
 eureka:
   server:
     enable-self-preservation: false #关闭自我保护
@@ -12,7 +15,7 @@ eureka:
     prefer-ip-address: true #当应用程序向eureka注册时，它将使用其IP地址而不是其主机名
   client:
     service-url:
-      defaultZone: http://root:root@localhost:8761/eureka/
+      defaultZone: http://root:1234@localhost:8761/eureka/
     register-with-eureka: false #不注册到其它的Eureka
     fetch-registry: false #不从其它的Eureka拉取注册表
 logging:

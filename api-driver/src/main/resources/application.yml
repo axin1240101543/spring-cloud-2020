@@ -6,7 +6,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://root:root@localhost:8761/eureka/
+      defaultZone: http://root:1234@localhost:8761/eureka/
     registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
     healthcheck:
       enabled: true #开启健康检查，需要引入actuator
