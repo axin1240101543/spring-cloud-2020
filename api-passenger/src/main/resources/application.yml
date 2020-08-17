@@ -20,13 +20,19 @@ eureka:
     metadata-map:
       a: b #灰度发布
     prefer-ip-address: true
-logging:
-  level:
-    root: info
+
 feign:
   client:
     config:
-      default:
-        connect-timeout: 5000
-        read-timeout: 5000
+      default: #可以指定具体的微服务
         logger-level: full
+#上面有4种日志类型
+#  none:不记录任何日志，默认值
+#  basic:仅记录请求方法，url，响应状态码，执行时间。
+#  headers：在basic基础上，记录header信息
+#  full：记录请求和响应的header，body，元数据。
+
+#上面的logger-level只对下面的 debug级别日志做出响应。
+logging:
+  level:
+    com.darren.center.api.passenger.feign.ServiceForecast: debug

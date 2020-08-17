@@ -8,6 +8,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 /**
  * 此处由于结合了eureka，所以name是 虚拟主机名，默认服务名，请求时 会将它解析成注册表中的服务。
@@ -22,5 +25,11 @@ public interface ServiceForecast {
 	
 	@RequestMapping(value = "/forecast/single",method = RequestMethod.POST)
 	public ResponseResult<ForecastResponse> forecast(@RequestBody ForecastRequest forecastRequest);
+
+	@RequestMapping(value = "/forecast/single1",method = RequestMethod.GET)
+	public ResponseResult<ForecastResponse> forecast1(@RequestParam("id") long id);
+
+	@RequestMapping(value = "/forecast/single2",method = RequestMethod.GET)
+	public ResponseResult<ForecastResponse> forecast2(@RequestParam Map<String, Object> map);
 	
 }

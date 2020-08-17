@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -39,6 +42,29 @@ public class OrderController {
         forecastRequest.setEndLatitude(endLatitude);
 		forecastRequest.setEndLongitude(endLongitude);
 		ResponseResult<ForecastResponse> result = serviceForecast.forecast(forecastRequest);
+		return ResponseResult.success(result.getData());
+	}
+
+	/**
+	 * http://localhost:8081/order/forecast1/8
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/forecast1/{id}")
+	public ResponseResult<ForecastResponse> forecast1(@PathVariable(value = "id") long id) {
+		ResponseResult<ForecastResponse> result = serviceForecast.forecast1(id);
+		return ResponseResult.success(result.getData());
+	}
+
+	/**
+	 * http://localhost:8081/order/forecast2
+	 * @return
+	 */
+	@GetMapping("/forecast2")
+	public ResponseResult<ForecastResponse> forecast2() {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("aaa", "123456");
+		ResponseResult<ForecastResponse> result = serviceForecast.forecast2(map);
 		return ResponseResult.success(result.getData());
 	}
 
