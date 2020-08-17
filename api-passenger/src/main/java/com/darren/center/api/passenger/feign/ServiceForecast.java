@@ -1,5 +1,6 @@
 package com.darren.center.api.passenger.feign;
 
+import com.darren.center.api.passenger.feign.config.FeignAuthConfiguration;
 import com.darren.center.service.common.dto.ResponseResult;
 import com.darren.center.service.common.dto.order.ForecastRequest;
 import com.darren.center.service.common.dto.order.ForecastResponse;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 也可以添加@RequestMapping
  */
 //@FeignClient(name = "service-valuation")
-@FeignClient(name = "my-service-valuation", url = "http://localhost:8883/")
+@FeignClient(name = "my-service-valuation", url = "http://localhost:8883/", configuration = FeignAuthConfiguration.class)
 public interface ServiceForecast {
 	
 	@RequestMapping(value = "/forecast/single",method = RequestMethod.POST)
