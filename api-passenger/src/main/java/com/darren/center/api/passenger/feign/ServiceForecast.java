@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 此时的name作用就是创建负载均衡器。
  * 也可以添加@RequestMapping
  */
-//@FeignClient(name = "service-valuation")
-@FeignClient(name = "my-service-valuation", url = "http://localhost:8883/", configuration = FeignAuthConfiguration.class)
+@FeignClient(name = "service-valuation")
+//@FeignClient(name = "my-service-valuation", url = "http://localhost:8883/", configuration = FeignAuthConfiguration.class)
+//@FeignClient(name = "service-valuation", configuration = FeignAuthConfiguration.class)
 public interface ServiceForecast {
 	
 	@RequestMapping(value = "/forecast/single",method = RequestMethod.POST)

@@ -23,3 +23,9 @@ eureka:
 logging:
   level:
     root: info
+feign:
+  client:
+    config:
+      service-valuation:
+        request-interceptors:
+          - com.darren.center.api.passenger.feign.interceptor.MyBasicAuthRequestInterceptor
