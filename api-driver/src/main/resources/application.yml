@@ -1,6 +1,10 @@
 spring:
   application:
     name: api-driver
+  security:
+    user:
+      name: root
+      password: 1234
 server:
   port: 8080
 eureka:

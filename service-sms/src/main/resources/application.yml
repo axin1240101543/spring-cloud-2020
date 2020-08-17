@@ -1,6 +1,10 @@
 spring:
   application:
     name: service-sms
+  security:
+    user:
+      name: root
+      password: 1234
 eureka:
   client:
     service-url:
