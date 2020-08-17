@@ -26,7 +26,6 @@ logging:
 feign:
   client:
     config:
-      default:
-        connect-timeout: 5000
-        read-timeout: 5000
-        logger-level: full
+      service-valuation:
+        request-interceptors:
+          - com.darren.center.api.passenger.feign.interceptor.MyBasicAuthRequestInterceptor

@@ -16,7 +16,7 @@ public class FeignAuthConfiguration {
 
     @Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor("root", "1234");
+        return new BasicAuthRequestInterceptor("root", "root");
     }
 
 }
