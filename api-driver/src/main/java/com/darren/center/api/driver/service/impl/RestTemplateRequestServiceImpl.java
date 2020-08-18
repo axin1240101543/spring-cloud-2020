@@ -31,6 +31,13 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
             @HystrixProperty(name = "fallback.enabled", value = "true") //该属性用来设置服务降级策略是否启用，默认是true
     })
     public ResponseResult smsSend(SmsSendRequest request) {
+
+        //测试忽略的异常
+        try {
+            int i = 1/0;
+        }catch (Exception e){
+            //throw new BusinessException("熔断忽略的异常，继承HystrixBadRequestException");
+        }
         String url = HttpUrlConstants.SERVICE_SMS_URL + "/send/alisms-template";
         //请求地址  请求数据  响应类型
         return restTemplate.postForEntity(url, request, ResponseResult.class).getBody();
