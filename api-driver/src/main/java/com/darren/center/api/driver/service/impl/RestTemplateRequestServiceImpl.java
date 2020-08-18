@@ -1,6 +1,7 @@
 package com.darren.center.api.driver.service.impl;
 
 import com.darren.center.api.driver.constant.HttpUrlConstants;
+import com.darren.center.api.driver.exception.HystrixIgnoreException;
 import com.darren.center.api.driver.service.RestTemplateRequestService;
 import com.darren.center.service.common.dto.ResponseResult;
 import com.darren.center.service.common.dto.sms.SmsSendRequest;
@@ -27,8 +28,12 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
 
     @Override
     //@HystrixCommand(fallbackMethod = "sendFail")
-    @HystrixCommand(fallbackMethod = "sendFail", commandProperties = {
-            @HystrixProperty(name = "fallback.enabled", value = "true") //该属性用来设置服务降级策略是否启用，默认是true
+    @HystrixCommand(fallbackMethod = "sendFail",
+            ignoreExceptions = {
+                HystrixIgnoreException.class
+            },
+            commandProperties = {
+                @HystrixProperty(name = "fallback.enabled", value = "true") //该属性用来设置服务降级策略是否启用，默认是true
     })
     public ResponseResult smsSend(SmsSendRequest request) {
 
@@ -37,6 +42,7 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
             int i = 1/0;
         }catch (Exception e){
             //throw new BusinessException("熔断忽略的异常，继承HystrixBadRequestException");
+            throw new HystrixIgnoreException("熔断忽略的异常，忽略属性设置");
         }
         String url = HttpUrlConstants.SERVICE_SMS_URL + "/send/alisms-template";
         //请求地址  请求数据  响应类型
