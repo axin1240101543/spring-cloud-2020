@@ -44,4 +44,16 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
     public ResponseResult sendFail(SmsSendRequest request) {
         return ResponseResult.fail(-3, "熔断");
     }
+
+    /**
+     * 捕获熔断的异常信息
+     * 此方法的 请求参数和 返回参数 要和原方法一致
+     * @param request
+     * @param throwable
+     * @return
+     */
+    public ResponseResult sendFail(SmsSendRequest request, Throwable throwable) {
+        log.error("异常信息:", throwable);
+        return ResponseResult.fail(-3, "熔断");
+    }
 }
