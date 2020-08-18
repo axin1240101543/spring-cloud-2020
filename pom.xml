@@ -22,6 +22,7 @@
 
         <!--基础服务层-->
         <module>eureka-register</module><!--注册中心-->
+        <module>service-hystrix-dashboard</module><!-- hystrix监控 -->
     </modules>
 
     <parent>

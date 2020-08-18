@@ -27,7 +27,7 @@ logging:
   level:
     root: info
 
-#Admin监控
+#Admin监控  http://localhost:8080/actuator/health
 management:
   endpoints:
     web:

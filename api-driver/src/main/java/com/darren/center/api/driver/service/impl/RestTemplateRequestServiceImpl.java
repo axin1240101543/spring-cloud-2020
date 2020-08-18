@@ -34,7 +34,7 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
             },
             commandProperties = {
                 @HystrixProperty(name = "fallback.enabled", value = "true"), //该属性用来设置服务降级策略是否启用，默认是true
-                @HystrixProperty(name = "circuitBreaker.forceOpen", value = "true") //熔断强制配置
+                @HystrixProperty(name = "circuitBreaker.forceOpen", value = "false") //熔断强制配置
     })
     public ResponseResult smsSend(SmsSendRequest request) {
 

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: service-hystrix-dashboard
+server:
+  port: 8888 #服务端口
