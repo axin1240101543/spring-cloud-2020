@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author : Darren
  * @date : 2020年08月12日 14:40:32
  **/
-@FeignClient(name = "service-sms")
+@FeignClient(name = "service-sms", fallback = SmsClient.SmsClientFallback.class)
 public interface SmsClient {
 
     /**
@@ -28,11 +28,11 @@ public interface SmsClient {
     @RequestMapping(value = "/send/alisms-template", method = RequestMethod.POST)
     ResponseResult sendSms(@RequestBody SmsSendRequest smsSendRequest) throws Exception;
 
-    /*@Component
+    @Component
     class SmsClientFallback implements SmsClient{
         @Override
         public ResponseResult sendSms(SmsSendRequest smsSendRequest) throws Exception {
-            return new ResponseResult().setCode(CommonStatusEnum.EXCEPTION.getCode()).setMessage(CommonStatusEnum.EXCEPTION.getValue());
+            return ResponseResult.fail(-3, "feign熔断");
         }
-    }*/
+    }
 }

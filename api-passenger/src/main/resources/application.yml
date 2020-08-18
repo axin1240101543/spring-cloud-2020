@@ -26,6 +26,8 @@ feign:
     config:
       default: #可以指定具体的微服务
         logger-level: full
+  hystrix:
+    enabled: true #feign自带Hystrix，但是默认没有打开，首先打开Hystrix
 #上面有4种日志类型
 #  none:不记录任何日志，默认值
 #  basic:仅记录请求方法，url，响应状态码，执行时间。
