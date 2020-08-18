@@ -1,12 +1,11 @@
 package com.darren.center.api.passenger;
 
-import com.darren.center.api.passenger.annotation.ExcudeFeignConfig;
+import com.darren.center.api.passenger.annotation.ExcludeFeignConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan(
         basePackages = {"com.darren.center.api.passenger"},
         excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ANNOTATION,value= ExcudeFeignConfig.class)
+                @ComponentScan.Filter(type = FilterType.ANNOTATION,value= ExcludeFeignConfig.class)
         }
 )
 public class ApiPassengerApplication {

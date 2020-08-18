@@ -1,5 +1,6 @@
 package com.darren.center.api.passenger.feign;
 
+import com.darren.center.api.passenger.config.FeignDisableHystrixConfiguration;
 import com.darren.center.service.common.dto.ResponseResult;
 import com.darren.center.service.common.dto.sms.SmsSendRequest;
 import feign.hystrix.FallbackFactory;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date : 2020年08月12日 14:40:32
  **/
 //@FeignClient(name = "service-sms", fallback = SmsClient.SmsClientFallback.class)
-@FeignClient(name = "service-sms", fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
+//@FeignClient(name = "service-sms", fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
+@FeignClient(name = "service-sms", configuration = FeignDisableHystrixConfiguration.class, fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
 public interface SmsClient {
 
     /**

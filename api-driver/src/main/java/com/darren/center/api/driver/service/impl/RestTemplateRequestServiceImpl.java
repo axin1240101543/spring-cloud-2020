@@ -38,12 +38,12 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
     public ResponseResult smsSend(SmsSendRequest request) {
 
         //测试忽略的异常
-        try {
+        /*try {
             int i = 1/0;
         }catch (Exception e){
             //throw new BusinessException("熔断忽略的异常，继承HystrixBadRequestException");
             throw new HystrixIgnoreException("熔断忽略的异常，忽略属性设置");
-        }
+        }*/
         String url = HttpUrlConstants.SERVICE_SMS_URL + "/send/alisms-template";
         //请求地址  请求数据  响应类型
         return restTemplate.postForEntity(url, request, ResponseResult.class).getBody();
