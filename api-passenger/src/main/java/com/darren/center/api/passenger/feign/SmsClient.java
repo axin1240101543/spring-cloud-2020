@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date : 2020年08月12日 14:40:32
  **/
 //@FeignClient(name = "service-sms", fallback = SmsClient.SmsClientFallback.class)
-//@FeignClient(name = "service-sms", fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
-@FeignClient(name = "service-sms", configuration = FeignDisableHystrixConfiguration.class, fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
+@FeignClient(name = "service-sms", fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
+//@FeignClient(name = "service-sms", configuration = FeignDisableHystrixConfiguration.class, fallbackFactory = SmsClient.SmsClientFallbackFactory.class)
 public interface SmsClient {
 
     /**
