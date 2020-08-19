@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zuul
+  security:
+    user:
+      name: root
+      password: 1234
+server:
+  port: 9000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:1234@localhost:8761/eureka/
+    registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
+    healthcheck:
+      enabled: true #开启健康检查，需要引入actuator
+  instance:
+    lease-renewal-interval-in-seconds: 30 #发送心跳给server的频率，每隔这个时间会主动心跳一次（定时任务）com/netflix/discovery/DiscoveryClient.class:905
+    lease-expiration-duration-in-seconds: 90 #Server从收到client后，下一次收到心跳的间隔时间。超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
+    metadata-map:
+      a: b #灰度发布
+    prefer-ip-address: true
+    virtual-host-name: zuul #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
+
+#ribbon
+api-driver:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
