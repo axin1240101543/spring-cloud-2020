@@ -22,11 +22,6 @@ eureka:
     prefer-ip-address: true
     virtual-host-name: zuul #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
 
-#日志
-logging:
-  level:
-    root: debug
-
 #ribbon zuul默认集成了：ribbon和hystrix。
 #api-driver:
 #  ribbon:
@@ -118,7 +113,6 @@ management:
 #  ignored-patterns:
 #  - /api-*/** #只能走routes的配置
 
-#zuul 前缀
 zuul:
   routes:
     api-driver: /zuul-api-driver/** # http://localhost:9000/api/zuul-api-driver/test/hello?name=darren&age=18
@@ -127,15 +121,3 @@ zuul:
   - /api-*/**
   prefix: /api #前缀
   strip-prefix: true #访问时带上前缀，实际 请求会将前缀去掉 - 全局移除
-
-#zuul:
-#  routes:
-#    custom-zuul-name: #此处名字随便取
-#      path: /zuul-custom-name/** # http://localhost:9000/api/zuul-custom-name/test/hello?name=darren&age=18
-#      service-id: api-driver
-#      strip-prefix: true #访问时带上前缀，实际 请求会将前缀去掉 - 当前自定义路径下的移除
-#    api-passenger: /zuul-api-passenger/** # http://localhost:9000/api/zuul-api-passenger/test/hello?name=darren&age=18
-#  ignored-services:
-#  - api-driver
-#  - api-passenger
-#  prefix: /api
