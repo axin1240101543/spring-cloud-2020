@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
@@ -31,6 +32,18 @@ public class TestController {
         log.info("name:{}, age:{}", name, age);
         String[] str = new String[]{name, age.toString()};
         return Arrays.toString(str);
+    }
+
+    /**
+     * 测试zuul - 敏感Header
+     * @param req
+     * @return
+     */
+    @RequestMapping("/token")
+    public String cookie(HttpServletRequest req) {
+        String token = req.getHeader("token");
+        System.out.println("token:"+token);
+        return "api-driver-token:"+token;
     }
 
 }
