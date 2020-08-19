@@ -46,3 +46,14 @@ ribbon: #feign在调用其他微服务接口前，会去请求该微服务的相
 service-valuation:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #ribbon自定义策略
+
+#Admin监控  http://localhost:8081/actuator/health、http://localhost:8081/actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always #默认是never
+      enabled: true
