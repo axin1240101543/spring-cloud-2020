@@ -53,22 +53,15 @@ management:
 #      url: http://localhost:8080/ #api-driver的地址 http://localhost:9000/zuul-custom-name/test/hello?name=darren&age=18
 
 #zuul 配置指定微服务的访问路径 - 自定义命名配置 - 基于2，恢复ribbon+hystrix
-#zuul:
-#  routes:
-#    custom-zuul-name: #此处名字随便取
-#      path: /zuul-custom-name/**
-#      service-id: no-eureka-api-driver #没有eureka的配置 http://localhost:9000/zuul-custom-name/test/hello?name=darren&age=18
-#
-#no-eureka-api-driver:
-#  ribbon:
-#    listOfServers: localhost:8080,localhost:8181
-#ribbon:
-#  eureka:
-#    enabled: false #将Eureka关闭，则Ribbon无法从Eureka中获取服务端列表信息
-
-#zuul 配置指定微服务的访问路径 - 指定serviceId
 zuul:
   routes:
     custom-zuul-name: #此处名字随便取
       path: /zuul-custom-name/**
-      service-id: api-driver # http://localhost:9000/zuul-custom-name/test/hello?name=darren&age=18
+      service-id: no-eureka-api-driver #没有eureka的配置 http://localhost:9000/zuul-custom-name/test/hello?name=darren&age=18
+
+no-eureka-api-driver:
+  ribbon:
+    listOfServers: localhost:8080,localhost:8181
+ribbon:
+  eureka:
+    enabled: false #将Eureka关闭，则Ribbon无法从Eureka中获取服务端列表信息

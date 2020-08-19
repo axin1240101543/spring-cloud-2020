@@ -22,7 +22,15 @@ eureka:
     prefer-ip-address: true
     virtual-host-name: zuul #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
 
-#ribbon zuul默认集成了：ribbon和hystrix。
-api-driver:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#开启admin监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+      show-details: always #默认是never
+    routes:
+      enabled: true # http://localhost:9000/actuator/routes
