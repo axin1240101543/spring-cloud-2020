@@ -1,10 +1,12 @@
 spring:
   application:
-    name: api-driver
+    name: zuul
   security:
     user:
       name: root
       password: 1234
+server:
+  port: 9000
 eureka:
   client:
     service-url:
@@ -18,30 +20,4 @@ eureka:
     metadata-map:
       a: b #灰度发布
     prefer-ip-address: true
-    virtual-host-name: api-driver #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
-
-#日志
-logging:
-  level:
-    root: info
-
-#Admin监控  http://localhost:8080/actuator/health、http://localhost:8080/actuator/hystrix.stream
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always #默认是never
-      enabled: true
----
-spring:
-  profiles: 8080
-server:
-  port: 8080
----
-spring:
-  profiles: 8181
-server:
-  port: 8181
+    virtual-host-name: zuul #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
