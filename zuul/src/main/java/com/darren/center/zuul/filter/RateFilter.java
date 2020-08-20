@@ -1,19 +1,20 @@
 package com.darren.center.zuul.filter;
 
+import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <h3>spring-cloud-2020</h3>
- * <p>鉴权Filter</p>
+ * <p>限流Filter</p>
  * http://localhost:9000/actuator/filters
  *
  * ZuulServlet中通过service方法，可以看出整个servlet的处理流程：
@@ -28,14 +29,25 @@ import javax.servlet.http.HttpServletRequest;
  *
  * http://localhost:9000/api/zuul-api-driver/test/hello?name=darren&age=18
  * header: token 123456
- * header: Authorization darren
+ * header: Authorization ''
  *
  * @author : Darren
- * @date : 2020年08月19日 16:02:27
+ * @date : 2020年08月19日 17:12:15
  **/
 @Slf4j
 @Component
-public class AuthFilter extends ZuulFilter {
+public class RateFilter extends ZuulFilter {
+
+    /**
+     * 如果是1，表示每秒1个令牌，实际通过压测获得
+     *
+     * 1、创建一个稳定输出令牌的RateLimiter，保证了平均每秒不超过permitsPerSecond个请求
+     * 2、当请求到来的速度超过了permitsPerSecond，保证每秒只处理permitsPerSecond个请求
+     * 3、当这个RateLimiter使用不足(即请求到来速度小于permitsPerSecond)，会囤积最多permitsPerSecond个请求
+     */
+    private static final RateLimiter RATE_LIMITER = RateLimiter.create(5);
+
+    private static AtomicInteger count = new AtomicInteger(0);
 
     @Override
     public String filterType() {
@@ -44,34 +56,28 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 4;
+        return -10;
     }
 
     @Override
     public boolean shouldFilter() {
         String requestURI = getRequest().getRequestURI();
-        log.info("鉴权Filter：{}", requestURI);
-        //只有此接口/zuul-api-driver/test/hello才被拦截
-        String checkUri = "/zuul-api-driver/test/hello";
-        if (requestURI.endsWith(checkUri)){
-            return true;
-        }
-        return false;
+        log.info("限流Filter：{}", requestURI);
+        //可以判断地址。是否限流
+        return true;
     }
 
     @Override
     public Object run() throws ZuulException {
-        log.info("AuthFilter begin");
         RequestContext currentContext = RequestContext.getCurrentContext();
-        String authorization = currentContext.getRequest().getHeader("Authorization");
-        if (StringUtils.isNotBlank(authorization)){
-            log.info("auth filter:认证通过");
-        }else{
-            log.info("auth filter:认证失败");
-            //不往下的过滤器继续了
+        /**
+         * 拿不到令牌马上返回。尝试获取桶里的令牌，如果有，则返回true，
+         *并且，总的令牌数减1。没有则返回false。
+         */
+        if (!RATE_LIMITER.tryAcquire()){
+            log.info("rate filter 拿不到令牌，被限流了:{}", count.addAndGet(1));
             currentContext.setSendZuulResponse(false);
-            currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-            currentContext.setResponseBody("认证失败");
+            currentContext.setResponseStatusCode(HttpStatus.TOO_MANY_REQUESTS.value());
         }
         currentContext.setSendZuulResponse(true);
         return null;
@@ -85,5 +91,4 @@ public class AuthFilter extends ZuulFilter {
         RequestContext currentContext = RequestContext.getCurrentContext();
         return currentContext.getRequest();
     }
-
 }
