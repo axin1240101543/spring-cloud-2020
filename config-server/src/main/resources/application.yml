@@ -13,6 +13,11 @@ spring:
           username: #私有需要配置
           password:
           timeout: 10 #默认是5秒，因为git慢
+  rabbitmq: # 自动刷新  http://localhost:15672/  guest guest  http://localhost:9100/actuator/bus-refresh
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 server:
   port: 9100
