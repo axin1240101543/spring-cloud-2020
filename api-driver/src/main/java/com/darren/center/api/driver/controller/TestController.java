@@ -1,6 +1,7 @@
 package com.darren.center.api.driver.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,19 @@ import java.util.Arrays;
 @RequestMapping("/test")
 @Slf4j
 public class TestController {
+
+    @Value("${env}")
+    private String env;
+
+    /**
+     * 测试spring cloud config
+     * http://localhost:8080/test/getConfig
+     * @return
+     */
+    @GetMapping("/getConfig")
+    public String getConfig(){
+        return env;
+    }
 
     /**
      * 测试zuul

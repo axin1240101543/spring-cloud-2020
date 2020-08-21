@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: api-driver
+  security:
+    user:
+      name: root
+      password: 1234
+  cloud: #spring cloud config client /{label}/{name}-{profiles}.yml name:
+    config:
+      uri:
+      - http://localhost:9100 # 和下面的discovery互斥
+      profile: dev # 环境，开发、测试、生产：dev qa prd
+      label: dev # 分支，仓库分支、默认master分支
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:1234@localhost:8761/eureka/
+    registry-fetch-interval-seconds: 30 #默认30秒从server端拉取一次注册表（定时任务）com/netflix/discovery/DiscoveryClient.class:899
+    healthcheck:
+      enabled: true #开启健康检查，需要引入actuator
+  instance:
+    lease-renewal-interval-in-seconds: 30 #发送心跳给server的频率，每隔这个时间会主动心跳一次（定时任务）com/netflix/discovery/DiscoveryClient.class:905
+    lease-expiration-duration-in-seconds: 90 #Server从收到client后，下一次收到心跳的间隔时间。超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
+    metadata-map:
+      a: b #灰度发布
+    prefer-ip-address: true
+    virtual-host-name: api-driver #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
+
+#日志
+logging:
+  level:
+    root: info
+
+#Admin监控  http://localhost:8080/actuator/health、http://localhost:8080/actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always #默认是never
+      enabled: true
+---
+spring:
+  profiles: 8080
+server:
+  port: 8080
+---
+spring:
+  profiles: 8181
+server:
+  port: 8181
