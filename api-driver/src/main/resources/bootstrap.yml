@@ -12,6 +12,11 @@ spring:
         service-id: config-server # config server 的服务id
       profile: dev # 环境，开发、测试、生产：dev qa prd
       label: master # 分支，仓库分支、默认master分支
+  rabbitmq: # 自动刷新  http://localhost:15672/  guest guest  http://localhost:8080/actuator/bus-refresh
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   client:
     service-url:
