@@ -2,6 +2,7 @@ package com.darren.center.api.driver.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,9 +15,14 @@ import java.util.Arrays;
  * <h3>spring-cloud-2020</h3>
  * <p></p>
  *
+ * @RefreshScope
+ * 刷新配置 http://localhost:8080/actuator/refresh  Content-Type：application/json
+ * 缺陷：只能一个一个实例刷新
+ *
  * @author : Darren
  * @date : 2020年08月19日 13:49:51
  **/
+@RefreshScope
 @RestController
 @RequestMapping("/test")
 @Slf4j
