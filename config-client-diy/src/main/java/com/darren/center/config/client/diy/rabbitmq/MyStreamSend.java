@@ -33,6 +33,11 @@ public class MyStreamSend {
     @Resource
     private MessageChannel output;
 
+    /**
+     * http://localhost:81/rabbitmq/send
+     * @param content
+     * @return
+     */
     @PostMapping("/send")
     public String sendTestData(@RequestBody String content){
         this.output.send(MessageBuilder.withPayload(content).build());
