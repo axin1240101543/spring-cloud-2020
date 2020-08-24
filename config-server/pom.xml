@@ -18,6 +18,12 @@
             <version>1.0.0-RELEASE</version>
         </dependency>
 
+        <!-- web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- eureka client（默认集成ribbon） -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
