@@ -1,17 +1,6 @@
 spring:
   application:
-    name: api-driver
-  security:
-    user:
-      name: root
-      password: 1234
-  cloud: #spring cloud config client /{label}/{name}-{profiles}.yml
-    config:
-      discovery:
-        enabled: true
-        service-id: config-server # config server 的服务id
-      profile: dev # 环境，开发、测试、生产：dev qa prd
-      label: master # 分支，仓库分支、默认master分支
+    name: config-client-diy
   rabbitmq: # 自动刷新  http://localhost:15672/  guest guest  http://localhost:8080/actuator/bus-refresh
     host: localhost
     port: 5672
@@ -50,11 +39,11 @@ management:
       enabled: true
 ---
 spring:
-  profiles: 8080
+  profiles: 81
 server:
-  port: 8080
+  port: 81
 ---
 spring:
-  profiles: 8181
+  profiles: 82
 server:
-  port: 8181
+  port: 82

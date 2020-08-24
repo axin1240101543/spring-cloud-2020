@@ -9,6 +9,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <!--测试-->
+        <module>config-client-diy</module><!--测试本地给本地发事件-->
+
         <!--通用层-->
 		<module>service-common</module>
 
