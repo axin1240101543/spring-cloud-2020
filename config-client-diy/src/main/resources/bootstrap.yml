@@ -6,6 +6,14 @@ spring:
     port: 5672
     username: guest
     password: guest
+  cloud:
+    stream:
+      default-binder: rabbit
+      bindings: #不是binders标签
+        input:
+          destination: stream-des-exchange #交换机名称
+        output:
+          destination: stream-des-exchange #交换机名称
 
 eureka:
   client:
