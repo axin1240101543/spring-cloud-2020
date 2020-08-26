@@ -28,18 +28,18 @@ import java.util.Arrays;
 @Slf4j
 public class TestController {
 
-    @Value("${env}")
-    private String env;
+    /*@Value("${env}")
+    private String env;*/
 
     /**
      * 测试spring cloud config
      * http://localhost:8080/test/getConfig
      * @return
      */
-    @GetMapping("/getConfig")
+    /*@GetMapping("/getConfig")
     public String getConfig(){
         return env;
-    }
+    }*/
 
     /**
      * 测试zuul
