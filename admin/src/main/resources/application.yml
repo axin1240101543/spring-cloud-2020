@@ -5,6 +5,25 @@ spring:
     user:
       name: root
       password: 1234
+#邮箱设置
+  mail:
+    host: smtp.qq.com
+    username: 1240101543
+    password: euhjlhiaaeyjgiag #授权码
+    properties:
+      mail:
+        smpt:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  boot:
+    admin:
+      notify:
+        mail:
+          from: 1240101543@qq.com #发件邮箱
+          to: 891640323@qq.com #收件邮箱
+
 server:
   port: 9200
 eureka:
