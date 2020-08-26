@@ -21,3 +21,14 @@ eureka:
 logging:
   level:
     root: info
+
+#Admin监控  http://localhost:8080/actuator/health、http://localhost:8080/actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always #默认是never
+      enabled: true

@@ -1,13 +1,12 @@
 spring:
   application:
-    name: service-hystrix-dashboard
+    name: admin
   security:
     user:
       name: root
       password: 1234
 server:
-  port: 8888 #服务端口
-
+  port: 9200
 eureka:
   client:
     service-url:
@@ -21,21 +20,23 @@ eureka:
     metadata-map:
       a: b #灰度发布
     prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port} #实例的ID规则
-    virtual-host-name: service-hystrix-dashboard #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
+    virtual-host-name: zuul #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
 
-#Admin监控  http://localhost:8080/actuator/health、http://localhost:8080/actuator/hystrix.stream
+#日志
+logging:
+  level:
+    root: info
+
+#开启admin监控
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: '*'
   endpoint:
     health:
-      show-details: always #默认是never
       enabled: true
+      show-details: always #默认是never
+    routes:
+      enabled: true # http://localhost:9000/actuator/routes
 
-#turbine配置
-turbine:
-  cluster-name-expression: "'default'" #指定集群名称为 default
-  app-config: api-driver,api-passenger #监控的应用名称，多个以逗号隔开

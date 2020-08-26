@@ -28,6 +28,7 @@
         <module>service-hystrix-dashboard</module><!-- hystrix监控 -->
         <module>zuul</module><!-- 网关 -->
         <module>config-server</module><!-- 配置中心 -->
+        <module>admin</module><!-- 健康检查 -->
     </modules>
 
     <parent>
@@ -47,6 +48,12 @@
     </properties>
 
     <dependencies>
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- 健康检查 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
