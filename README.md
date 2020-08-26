@@ -7,21 +7,21 @@
 
 #### 软件架构
 ##### 基础服务层：
-eureka-register：注册中心
-service-hystrix-dashboard：hystrix监控
-zuul：网关
-config-server：配置中心
-admin：健康检查
+* eureka-register：注册中心
+* service-hystrix-dashboard：hystrix监控
+* zuul：网关
+* config-server：配置中心
+* admin：健康检查
 ##### 能力层
-service-sms：短信服务
-service-valuation：估价服务
+* service-sms：短信服务
+* service-valuation：估价服务
 ##### 业务层
-api-driver：司机端
-api-passenger：乘客端
+* api-driver：司机端
+* api-passenger：乘客端
 ##### 通用层
-service-common
+* service-common
 ##### 测试
-config-client-diy：测试本地给本地发事件
+* config-client-diy：测试本地给本地发事件
 
 #### 软件版本
 
@@ -34,8 +34,8 @@ config-client-diy：测试本地给本地发事件
 
 #### 使用说明
 
-1.  启动注册中心eureka-register
-2.  启动配置中心config-server
+1.  启动注册中心 eureka-register
+2.  启动配置中心 config-server
 3.  启动服务提供者 service-sms、service-valuation
 4.  启动服务消费者 api-driver、api-passenger
 
