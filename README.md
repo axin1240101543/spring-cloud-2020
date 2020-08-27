@@ -6,20 +6,38 @@
 无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
 
 #### 软件架构
-软件架构说明
+##### 基础服务层：
+* eureka-register：注册中心
+* service-hystrix-dashboard：hystrix监控
+* zuul：网关
+* config-server：配置中心
+* admin：健康检查
+##### 能力层
+* service-sms：短信服务
+* service-valuation：估价服务
+##### 业务层
+* api-driver：司机端
+* api-passenger：乘客端
+##### 通用层
+* service-common
+##### 测试
+* config-client-diy：测试本地给本地发事件
 
+#### 软件版本
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 软件架构说明
+1.  Spring Cloud version:Greenwich.SR2
+2.  Spring Boot version:2.1.7.RELEASE
+3.  IntelliJ IDEA 2019.1.4(Ultimate Edition)
+4.  Maven 3.5.4
+5.  RabbitMQ 4.2.0
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  启动注册中心 eureka-register
+2.  启动配置中心 config-server
+3.  启动服务提供者 service-sms、service-valuation
+4.  启动服务消费者 api-driver、api-passenger
 
 #### 参与贡献
 
