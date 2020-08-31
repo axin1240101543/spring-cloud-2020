@@ -27,7 +27,8 @@ public class GrabOrderController {
     //@Qualifier("grabRedisLockService1") //Redis锁
     //@Qualifier("grabRedisLockService2") //Redis锁
     //@Qualifier("grabRedisLockService3") //Redis锁
-    @Qualifier("grabRedisLockService4") //Redis锁
+    //@Qualifier("grabRedisLockService4") //Redis锁
+    @Qualifier("grabRedissonLockService") //Redisson锁
     @Autowired
     private GrabService grabService;
 
