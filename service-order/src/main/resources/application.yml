@@ -5,6 +5,13 @@ spring:
     user:
       name: root
       password: root
+  redis: #redis 配置
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 2000
+    password: 1234
+#eureka
 eureka:
   client:
     service-url:
@@ -19,6 +26,7 @@ eureka:
       a: b #灰度发布
     prefer-ip-address: true
     virtual-host-name: service-order #默认情况下，虚拟主机名=服务名称，虚拟主机名最好不要用"_"。
+#日志
 logging:
   level:
     root: info
