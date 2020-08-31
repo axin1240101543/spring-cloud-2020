@@ -24,7 +24,8 @@ public class GrabOrderController {
     //@Qualifier("grabNoLockService") //无锁
     //@Qualifier("grabJVMLockService") //JVM锁
     //@Qualifier("grabMySQLLockService") //MySQL锁
-    @Qualifier("grabRedisLockService1") //Redis锁
+    //@Qualifier("grabRedisLockService1") //Redis锁
+    @Qualifier("grabRedisLockService2") //Redis锁
     @Autowired
     private GrabService grabService;
 
