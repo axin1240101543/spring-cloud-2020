@@ -30,9 +30,9 @@ public class GrabJVMLockServiceImpl implements GrabService {
                 log.info("司机:{}开始抢单:{}", driverId, orderId);
                 boolean b = orderService.grab(orderId, driverId);
                 if (b){
-                    log.info("司机:{}开始抢单:{}抢单成功", driverId, orderId);
+                    log.info("司机:{}结束抢单:{}抢单成功", driverId, orderId);
                 }else {
-                    log.info("司机:{}开始抢单:{}抢单失败", driverId, orderId);
+                    log.info("司机:{}结束抢单:{}抢单失败", driverId, orderId);
                 }
             }finally {
 

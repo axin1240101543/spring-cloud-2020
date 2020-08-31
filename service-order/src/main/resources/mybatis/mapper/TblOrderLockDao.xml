@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.darren.center.service.order.dao.TblOrderLockDao">
+  <resultMap id="BaseResultMap" type="com.darren.center.service.common.entity.TblOrderLock">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="driver_id" jdbcType="INTEGER" property="driverId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, driver_id
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_order_lock
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.darren.center.service.common.entity.TblOrderLock">
+    insert into tbl_order_lock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="driverId != null">
+        driver_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="driverId != null">
+        #{driverId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
