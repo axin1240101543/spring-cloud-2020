@@ -42,11 +42,11 @@ management:
       enabled: true
 ---
 spring:
-  profiles: 8080
-server:
-  port: 8080
----
-spring:
   profiles: 8181
 server:
   port: 8181
+---
+spring:
+  profiles: 8182
+server:
+  port: 8182

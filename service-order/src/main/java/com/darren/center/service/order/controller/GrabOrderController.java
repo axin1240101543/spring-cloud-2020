@@ -1,6 +1,9 @@
-package com.darren.center.service.valuation.controller;
+package com.darren.center.service.order.controller;
 
+import com.darren.center.service.order.service.GrabService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,19 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
  * @date : 2020年08月12日 10:45:38
  **/
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/grab")
 @Slf4j
-public class OrderController {
+public class GrabOrderController {
+
+    @Qualifier("grabNoLockService")
+    @Autowired
+    private GrabService grabService;
 
     /**
-     * 保存订单
+     * 司机抢单
      * @param orderId
      * @param driverId
      * @return
      */
     @GetMapping("/do/{orderId}")
-    public String saveOrder(@PathVariable("orderId")String orderId, int driverId){
-
+    public String grab(@PathVariable("orderId")int orderId, int driverId){
+        grabService.grabOrder(orderId, driverId);
         return "";
     }
 

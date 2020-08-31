@@ -50,6 +50,13 @@ public class RestTemplateRequestServiceImpl implements RestTemplateRequestServic
         return restTemplate.postForEntity(url, request, ResponseResult.class).getBody();
     }
 
+    @Override
+    public String grabOrder(int orderId, int driverId){
+        String url = HttpUrlConstants.SERVICE_ORDER_URL + "/grab/do/" + orderId + "?driverId=" + driverId;
+        //请求地址  响应类型
+        return restTemplate.getForEntity(url, String.class).getBody();
+    }
+
     /**
      * 此方法的 请求参数和 返回参数 要和原方法一致
      * @param request

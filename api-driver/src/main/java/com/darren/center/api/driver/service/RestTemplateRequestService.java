@@ -19,4 +19,12 @@ public interface RestTemplateRequestService {
      */
     ResponseResult smsSend(SmsSendRequest request);
 
+    /**
+     * 抢单
+     * @param orderId
+     * @param driverId
+     * @return
+     */
+    String grabOrder(int orderId, int driverId);
+
 }
