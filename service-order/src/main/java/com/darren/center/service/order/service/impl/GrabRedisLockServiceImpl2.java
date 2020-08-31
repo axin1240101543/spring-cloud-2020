@@ -32,6 +32,7 @@ public class GrabRedisLockServiceImpl2 implements GrabService {
         String lock = orderId + "";
         /**
          * 情况二：加超时时间,会有加不上的情况，运维重启
+         * 超时时间应该一次加，不应该分2行代码
          */
         Boolean lockStatus = stringRedisTemplate.opsForValue().setIfAbsent(lock.intern(), driverId + "");
         stringRedisTemplate.expire(lock.intern(), 30L, TimeUnit.SECONDS);
