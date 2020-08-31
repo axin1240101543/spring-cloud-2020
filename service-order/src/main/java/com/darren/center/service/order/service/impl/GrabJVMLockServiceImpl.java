@@ -2,7 +2,9 @@ package com.darren.center.service.order.service.impl;
 
 import com.darren.center.service.common.dto.ResponseResult;
 import com.darren.center.service.order.service.GrabService;
+import com.darren.center.service.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,9 +18,26 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class GrabJVMLockServiceImpl implements GrabService {
 
+    @Autowired
+    private OrderService orderService;
+
     @Override
     public ResponseResult grabOrder(int orderId, int driverId) {
-        log.info("GrabJVMLockService, 订单ID：{}， 司机ID:{}", orderId, driverId);
+        String lock = orderId + "";
+
+        synchronized (lock.intern()){
+            try {
+                log.info("司机:{}开始抢单:{}", driverId, orderId);
+                boolean b = orderService.grab(orderId, driverId);
+                if (b){
+                    log.info("司机:{}开始抢单:{}抢单成功", driverId, orderId);
+                }else {
+                    log.info("司机:{}开始抢单:{}抢单失败", driverId, orderId);
+                }
+            }finally {
+
+            }
+        }
         return null;
     }
 }
