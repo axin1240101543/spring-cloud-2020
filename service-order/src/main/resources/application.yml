@@ -11,6 +11,22 @@ spring:
     port: 6379
     timeout: 2000
     password: 1234
+  datasource: #数据库连接配置
+    type: com.alibaba.druid.pool.DruidDataSource #配置当前使用的数据源的操作类型
+    driver-class-name: com.mysql.cj.jdbc.Driver #配置MySQL的驱动程序类
+    url: jdbc:mysql://localhost:3306/online-taxi?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai #数据库连接地址
+    username: root #数据库连接用户名
+    password: 1234 #数据库连接密码
+    dbcp2: #进行数据库连接池的配置
+      initial-size: 5 #初始化提供的连接数
+      min-idle: 5 #数据库连接池的最小维持连接数
+      max-total: 5 #最大的连接数
+      max-wait-millis: 200 #等待连接获取的最大超时时间
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
 #eureka
 eureka:
   client:
@@ -40,6 +56,13 @@ management:
     health:
       show-details: always #默认是never
       enabled: true
+
+#mybatis配置
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml #mybatis配置文件所在路径
+  type-aliases-package: com.darren.center.service.common #定义所有操作类的别名所在包（实体类）
+  mapper-locations:
+  - classpath:mybatis/mapper/*.xml #所有的mapper映射文件
 ---
 spring:
   profiles: 8885
