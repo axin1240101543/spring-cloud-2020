@@ -1,6 +1,7 @@
 package com.darren.center.service.order.config;
 
 import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -52,7 +53,7 @@ public class RedisConfig {
      *  redisson - 哨兵
      * @return
      */
-    @Bean
+    @Bean("redisson")
     @Order(1) //先加载RedisSentinelProperties类
     public Redisson getRedisson(){
         Config config = new Config();
@@ -62,6 +63,42 @@ public class RedisConfig {
               .setDatabase(0);
               //.setPassword("1234");
         return (Redisson) Redisson.create(config);
+    }
+
+    /**
+     * 红锁1
+     */
+    @Bean
+    public RedissonClient redissonClient1(){
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress("192.168.244.8:6382")
+                .setDatabase(0);
+        return Redisson.create(config);
+    }
+
+    /**
+     * 红锁2
+     */
+    @Bean
+    public RedissonClient redissonClient2(){
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress("192.168.244.8:6383")
+                .setDatabase(0);
+        return Redisson.create(config);
+    }
+
+    /**
+     * 红锁3
+     */
+    @Bean
+    public RedissonClient redissonClient3(){
+        Config config = new Config();
+        config.useSingleServer()
+                .setAddress("192.168.244.8:6384")
+                .setDatabase(0);
+        return Redisson.create(config);
     }
 
 }
