@@ -7,10 +7,11 @@ spring:
       password: root
   redis: #redis 配置
     database: 0
-    host: 127.0.0.1
+    host: 192.168.244.8
     port: 6379
     timeout: 2000
-    password: 1234
+    password:
+
   datasource: #数据库连接配置
     type: com.alibaba.druid.pool.DruidDataSource #配置当前使用的数据源的操作类型
     driver-class-name: com.mysql.cj.jdbc.Driver #配置MySQL的驱动程序类
@@ -26,6 +27,13 @@ spring:
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
+#自定义哨兵
+sentinel:
+  address:
+    - 192.168.244.8:26379
+    - 192.168.244.8:26380
+    - 192.168.244.8:26381
+  masterName: mymaster
 
 #eureka
 eureka:
