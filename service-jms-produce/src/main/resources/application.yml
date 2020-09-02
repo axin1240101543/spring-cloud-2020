@@ -1,0 +1,23 @@
+#服务端口
+server:
+  port: 5001
+spring:
+  application:
+    name: service-jms-produce
+  activemq:
+    broker-url: tcp://10.80.1.102:61616?wireFormat.maxInactivityDuration=0
+    user: admin
+    password: admin
+    pool:
+      enabled: true
+      max-connections: 100
+
+#Admin监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

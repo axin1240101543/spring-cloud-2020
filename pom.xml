@@ -30,6 +30,8 @@
         <module>zuul</module><!-- 网关 -->
         <module>config-server</module><!-- 配置中心 -->
         <module>admin</module><!-- 健康检查 -->
+        <module>service-jms-produce</module> <!-- 消息生产者 -->
+        <module>service-jms-consumer</module> <!-- 消息消费者 -->
     </modules>
 
     <parent>
