@@ -11,7 +11,7 @@
 * service-hystrix-dashboard：hystrix监控
 * zuul：网关
 * config-server：配置中心
-* admin：健康检查
+* admin：健康检查 zipkin
 ##### 能力层
 * service-sms：短信服务
 * service-valuation：估价服务
@@ -22,6 +22,7 @@
 * service-common
 ##### 测试
 * config-client-diy：测试本地给本地发事件
+* alibaba-seata：阿里分布式事务解决方案Seata实战
 
 #### 软件版本
 
