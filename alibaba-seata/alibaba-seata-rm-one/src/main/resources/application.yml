@@ -7,7 +7,7 @@ spring:
   cloud:
     alibaba:
       seata:
-        tx-service-group: fbs_tx_group #和TM以及每个RM目录下的file文件中的名字要一致
+        tx-service-group: fbs_tx_group #和seata server的file.conf（vgroup_mapping.fbs_tx_group= "default"）以及每个微服务resources目录下的file.conf（vgroup_mapping.fbs_tx_group= "default"）要一致
   #数据库连接配置
   datasource:
     #配置当前使用的数据源的操作类型
